@@ -22,7 +22,7 @@ spring:
       config:
          server:
             git:
-               uri: https://github.com/Elias0099/ms-admin-server-data.git
+               uri: https://github.com/Elias0099/ms-proyect-lp2.git
                search-paths:
                - ms-admin-server-data
                username: ${USER_NAME}
@@ -30,7 +30,7 @@ spring:
                Clone-on-start: true
                force-pull: true
                timeout: 5
-               default-label: master
+               default-label: Server-registry
                
                
                
