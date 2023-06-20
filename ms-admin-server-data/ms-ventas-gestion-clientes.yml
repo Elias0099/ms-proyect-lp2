@@ -1,7 +1,7 @@
 server:
   port: 8082
     
-# My SQL #
+# Postgres SQL #
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/MS_02_2022_CLIENTES
@@ -18,7 +18,6 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         
 # Spring Boot Admin
-
   boot:
      admin:
         client:
