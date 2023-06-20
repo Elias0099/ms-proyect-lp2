@@ -1,7 +1,7 @@
 server:
   port: 8083
     
-# My SQL #
+# My SQL #l
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/MS_02_2022_CATEGORIAS
