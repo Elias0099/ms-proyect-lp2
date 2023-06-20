@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: ms-ventas-gestion-clientes
+  cloud:
+    config:
+#      import-check:
+#          enabled: false
+#    enabled: false
+#      import: optional:configserver:http://localhost:8888
+      uri: http://localhost:8888
+      fail-fast: true
+      retry:
+         max-attempts: 20
+         max-interval: 15000
+         initial-interval: 10000
+         
+         
