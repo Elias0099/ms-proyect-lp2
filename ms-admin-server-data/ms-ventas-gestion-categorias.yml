@@ -30,3 +30,10 @@ eureka:
       serviceUrl:
          defaultZone: http://localhost:8889/eureka
          
+# Actuator
+management:
+   endpoints:
+      web:
+         exposure:
+            include: "*"
+         
