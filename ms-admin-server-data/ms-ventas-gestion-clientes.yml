@@ -16,10 +16,19 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+        
+# Spring Boot Admin
+
+  boot:
+     admin:
+        client:
+           url: http://localhost:8890
+        
     
 # Registry Client
 eureka:
    client:
+      registryFetchIntervalSeconds: 5
       fetch-registry: true
       serviceUrl:
          defaultZone: http://localhost:8889/eureka
