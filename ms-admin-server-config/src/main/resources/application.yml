@@ -30,7 +30,7 @@ spring:
                Clone-on-start: true
                force-pull: true
                timeout: 5
-               default-label: Server-registry 
+               default-label: Server-registry
                
                
                
