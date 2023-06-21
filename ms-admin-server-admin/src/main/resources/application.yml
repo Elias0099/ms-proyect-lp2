@@ -3,10 +3,10 @@ server:
 spring:
   application:
      name: ms-admin-server-admin
-  #boot:
-  #  admin:
-  #    discovery:
-  #  ignored-services: ms-admin-server-admin
+  boot:
+     admin:
+       discovery:
+          ignored-services: ms-admin-server-admin
   
 # Registry Client
 eureka:
