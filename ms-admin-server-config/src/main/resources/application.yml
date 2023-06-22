@@ -3,6 +3,7 @@ server:
 spring:
   application:
     name: ms-admin-config-server
+    
 #Configuracion Local
   profiles:
     active: native
