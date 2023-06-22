@@ -5,30 +5,30 @@ spring:
     name: ms-admin-config-server
     
 #Configuracion Local
-#  profiles:
-#    active: native
-#  cloud:
-#    config:
-#      server: 
-#        native:
-#          searchLocations: file:///C:/Users/elias/eclipse-workspace/ProyectoMicroservicios/ms-admin-server-data
+  profiles:
+    active: native
+  cloud:
+    config:
+      server: 
+        native:
+          searchLocations: file:///C:/Users/elias/git/Server-registry/ms-admin-server-data
 
 
 #Configuratin Cloud (git)
 
-  cloud:
-      config:
-         server:
-            git:
-               uri: https://github.com/Elias0099/ms-proyect-lp2.git
-               search-paths:
-               - ms-admin-server-data
-               username: ${USER_NAME}
-               password: ${USER_PASSWORD}
-               Clone-on-start: true
-               force-pull: true
-               timeout: 5
-               default-label: Server-registry
+#  cloud:
+#      config:
+#         server:
+#            git:
+#               uri: https://github.com/Elias0099/ms-proyect-lp2.git
+#               search-paths:
+#               - ms-admin-server-data
+#               username: ${USER_NAME}
+#               password: ${USER_PASSWORD}
+#               Clone-on-start: true
+#               force-pull: true
+#               timeout: 5
+#               default-label: Server-registry
                
                
                
