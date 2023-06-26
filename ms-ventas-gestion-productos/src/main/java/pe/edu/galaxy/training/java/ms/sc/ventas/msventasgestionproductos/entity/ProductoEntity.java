@@ -42,9 +42,6 @@ public class ProductoEntity extends GenericEntity{
 	  	
 	  	@Column(name = "IMG")
 	  	private String img;
-	  	
-	  	@Column(name = "ESTADO")
-	  	private String estado;
 
 		@Column(name = "IDCATEGORIA")
 		private Long idcategoria;

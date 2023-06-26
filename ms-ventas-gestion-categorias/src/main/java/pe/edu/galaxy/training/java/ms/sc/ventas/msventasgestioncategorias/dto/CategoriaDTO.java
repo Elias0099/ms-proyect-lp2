@@ -1,16 +1,23 @@
 package pe.edu.galaxy.training.java.ms.sc.ventas.msventasgestioncategorias.dto;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
-public class CategoriaDTO implements Serializable{
+@EqualsAndHashCode(callSuper=false)
+@JsonPropertyOrder(value = {"id","nombre","descripcion"})
+public class CategoriaDTO extends GenericDTO{
 	
-	private static final long serialVersionUID = -9807309035903996L;
 	private Long id;
     private String nombre;
     private String descripcion;
-    private String estado;
 
 }

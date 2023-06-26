@@ -1,6 +1,5 @@
 package pe.edu.galaxy.training.java.ms.sc.ventas.msventasgestioncategorias.entity;
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,14 +8,22 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import lombok.Data;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
-@Entity
+@EqualsAndHashCode(callSuper=true)
 @Table(name = "categoria")
-public class CategoriaEntity implements Serializable {
+@Entity(name = "CategoriaEntity")
+public class CategoriaEntity extends GenericEntity {
   
-    private static final long serialVersionUID = -2170897015344177815L;
 
     @Id
     @Column(name = "ID_CATEGORIA")
@@ -30,9 +37,7 @@ public class CategoriaEntity implements Serializable {
 
     @Column(name = "DESCRIPCION")
     private String descripcion;
-
-    @Column(name = "ESTADO")
-    private String estado;
+    
 }
 
 
