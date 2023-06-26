@@ -1,9 +1,9 @@
 package pe.edu.galaxy.training.java.ms.sc.ventas.msventasgestionproductos.rest;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Builder;
 import lombok.Data;
+import pe.edu.galaxy.training.java.ms.sc.ventas.msventasgestionproductos.commons.Message;
 
 @Builder
 @Data

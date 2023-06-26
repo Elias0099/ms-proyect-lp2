@@ -1,5 +1,6 @@
 package pe.edu.galaxy.training.java.ms.sc.ventas.msventasgestionproductos.rest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -9,8 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.slf4j.Slf4j;
+import pe.edu.galaxy.training.java.ms.sc.ventas.msventasgestionproductos.commons.Message;
 import pe.edu.galaxy.training.java.ms.sc.ventas.msventasgestionproductos.dto.ProductoDTO;
 import pe.edu.galaxy.training.java.ms.sc.ventas.msventasgestionproductos.service.ProductoService;
 import pe.edu.galaxy.training.java.ms.sc.ventas.msventasgestionproductos.service.exception.ServiceException;
@@ -30,54 +33,35 @@ import java.util.Optional;
 @RequestMapping(API_PRODUCTO)
 public class ProductoREST {
 
+	@Autowired
 	private ProductoService productoService;
 
-	public ProductoREST(ProductoService productoService) {
-		super();
-		this.productoService = productoService;
-	}
-	
+
 	@GetMapping
-	public ResponseEntity<Response>  findByLike(){
-		try {
-			List<ProductoDTO> lstProductoDTO= this.productoService.findByLike(null);
-			if (lstProductoDTO.isEmpty()) {
-				return ResponseEntity.noContent().build();
-			}
-			return ResponseEntity.ok(
-					Response
-					.builder()
-					.message(Message.builder().code(COD_CONSULTA_EXITO).message(MSG_CONSULTA_EXITO).build())
-					.data(lstProductoDTO)
-					.build());
-		} catch (Exception e) {
-			log.error(e.getMessage(),e);
-			return ResponseEntity.internalServerError().build();
-		}
-	}
-	
-	@GetMapping("/{id}")
-	public ResponseEntity<Response> findById(@PathVariable Long id) {
+	public ResponseEntity<?> findByLike(@RequestParam(name = "nombre", defaultValue = "") String nombre) {
 	    try {
-	        Optional<ProductoDTO> optionalProductoDTO = productoService.findById(id);
-	        if (optionalProductoDTO.isPresent()) {
-	            ProductoDTO productoDTO = optionalProductoDTO.get();
-	            return ResponseEntity.ok(
-	                    Response.builder()
-	                            .message(Message.builder().code(COD_CONSULTA_EXITO).message(MSG_CONSULTA_EXITO).build())
-	                            .data(productoDTO)
-	                            .build());
+	        List<ProductoDTO> productos = productoService.findByLike(ProductoDTO.builder().nombre(nombre).build());
+	        if (!productos.isEmpty()) {
+	            return ResponseEntity.ok(productos);
 	        } else {
-	            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-	                    .body(Response.builder()
-	                            .message(Message.builder().code(COD_PRODUCT_NOT_FOUND).message(MSG_PRODUCT_NOT_FOUND).build())
-	                            .build());
+	            return ResponseEntity.noContent().build();
 	        }
-	    } catch (Exception e) {
+	    } catch (ServiceException e) {
 	        log.error(e.getMessage(), e);
 	        return ResponseEntity.internalServerError().build();
 	    }
 	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<?> findById(@PathVariable("id") Long id){
+		
+		try {
+			return ResponseEntity.ok(productoService.findById(ProductoDTO.builder().id(id).build()).get());
+		} catch (ServiceException e) {
+			log.error(e.getMessage(),e);
+			return ResponseEntity.internalServerError().build();
+		}
+	};
 
 	
 	@PostMapping
