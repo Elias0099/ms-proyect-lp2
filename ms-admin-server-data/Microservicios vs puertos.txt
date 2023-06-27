@@ -5,6 +5,7 @@ Negocio
 1.- ms-ventas-gestion-productos				8081
 2.- ms-ventas-gestion-clientes				8082
 3.- ms-ventas-gestion-categorias			8083
+4.- ms-ventas-gestion-boletas				8084
 
 4.- ms-ventas-gestion-pedidos-query			8084
 5.- ms-gestion-pedidos-command				8085
