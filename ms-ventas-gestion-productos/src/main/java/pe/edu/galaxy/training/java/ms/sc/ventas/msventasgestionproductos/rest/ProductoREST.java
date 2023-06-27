@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.slf4j.Slf4j;
+
 import pe.edu.galaxy.training.java.ms.sc.ventas.msventasgestionproductos.commons.Message;
 import pe.edu.galaxy.training.java.ms.sc.ventas.msventasgestionproductos.dto.ProductoDTO;
 import pe.edu.galaxy.training.java.ms.sc.ventas.msventasgestionproductos.service.ProductoService;
@@ -26,7 +27,6 @@ import static pe.edu.galaxy.training.java.ms.sc.ventas.msventasgestionproductos.
 import static pe.edu.galaxy.training.java.ms.sc.ventas.msventasgestionproductos.commons.GlobalConstants.MSG_PRODUCT_NOT_FOUND;
 
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -42,7 +42,11 @@ public class ProductoREST {
 	    try {
 	        List<ProductoDTO> productos = productoService.findByLike(ProductoDTO.builder().nombre(nombre).build());
 	        if (!productos.isEmpty()) {
-	            return ResponseEntity.ok(productos);
+	        	return ResponseEntity.ok(
+                        Response.builder()
+                                .message(Message.builder().code(COD_CONSULTA_EXITO).message(MSG_CONSULTA_EXITO).build())
+                                .data(productos)
+                                .build());
 	        } else {
 	            return ResponseEntity.noContent().build();
 	        }
@@ -53,15 +57,27 @@ public class ProductoREST {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<?> findById(@PathVariable("id") Long id){
-		
-		try {
-			return ResponseEntity.ok(productoService.findById(ProductoDTO.builder().id(id).build()).get());
-		} catch (ServiceException e) {
-			log.error(e.getMessage(),e);
-			return ResponseEntity.internalServerError().build();
-		}
-	};
+    public ResponseEntity<?> findById(@PathVariable("id") Long id) {
+        try {
+            ProductoDTO producto = productoService.findById(ProductoDTO.builder().id(id).build()).orElse(null);
+            if (producto != null) {
+                return ResponseEntity.ok(
+                        Response.builder()
+                                .message(Message.builder().code(COD_CONSULTA_EXITO).message(MSG_CONSULTA_EXITO).build())
+                                .data(producto)
+                                .build());
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(
+                                Response.builder()
+                                        .message(Message.builder().code(COD_PRODUCT_NOT_FOUND).message(MSG_PRODUCT_NOT_FOUND).build())
+                                        .build());
+            }
+        } catch (ServiceException e) {
+            log.error(e.getMessage(), e);
+            return ResponseEntity.internalServerError().build();
+        }
+    }
 
 	
 	@PostMapping
