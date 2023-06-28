@@ -19,4 +19,4 @@ eureka:
    client:
       fetch-registry: true
       serviceUrl:
-         defaultZone: http://localhost:8089/eureka
+         defaultZone: http://localhost:8889/eureka

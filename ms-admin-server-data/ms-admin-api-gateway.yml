@@ -16,13 +16,13 @@ spring:
       discovery.locator:    #A           
           enabled: true           
           lowerCaseServiceId: true
-      routes:
-#      - id: id-ms-gestion-productos
-#        uri: lb://MS-GESTION-PRODUCTOS
-#        predicates:
-#        - Path=/ms-productos/**
-#        filters:
-#        - RewritePath=/ms-productos/(?<path>.*), /$\{path}
+#      routes:
+#        - id: ms-ventas-gestion-productos
+#          uri: lb://ms-server-productos
+#          predicates:
+#           - Path=/v1/productos/**
+#          filters:
+#           - AuthFilter
         
 #      - id: albums
 #        uri: https://jsonplaceholder.typicode.com/albums
