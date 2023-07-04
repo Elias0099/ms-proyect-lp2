@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -19,8 +20,9 @@ public class ClienteEntity implements Serializable {
 	private static final long serialVersionUID = -2170897015344177815L;
 
 	@Id
-	@Column(name = "ID_CLIENTE")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+  	@Column(name = "ID_CLIENTE")
+  	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqCliente")
+    @SequenceGenerator(sequenceName = "SEQ_CLIENTE", allocationSize = 1, name = "seqCliente")
 	private Long id;
 
 	@NotNull(message = "Nombre del cliente es requerido")
